@@ -18,7 +18,7 @@ int main()
      * here or you can make separate functions - up to you.
      */
     std::cout << "Welcome to Vacuum CLeaning Game!";
-    std::cout << "------------------------------------------------\n";
+    std::cout << "----------------------------------------------\n";
     
 
     std::cout << "Good bye!\n\n";
