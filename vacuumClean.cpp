@@ -19,6 +19,7 @@ int main()
      */
     int n = 0;
     int choice;
+    Game game;
 
     while(n == 0) {
         std::cout << "Welcome to Vacuum CLeaning Game! \n";
@@ -31,11 +32,11 @@ int main()
         std::cout << "\n\n";      
 
         if(choice == 1){
-            std::cout << "Play Game CHANGE THIS \n";
+            game.start();
         } else if (choice == 2) {
             showStudentInformation("Joseph Packham", "s38389789", "s3838978@student.rmit.edu.au");
         } else if (choice == 3) {
-            n++;
+            n++; 
         }
 
 
