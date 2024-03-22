@@ -43,6 +43,9 @@ Board::~Board()
 void Board::load(int boardId)
 {
     // TODO
+    //test
+    std::cout << "Board " << boardId << " loaded\n";
+    
 }
 
 bool Board::placePlayer(Position position)

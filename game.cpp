@@ -4,7 +4,7 @@
 
 Game::Game() 
 {
-    //write constructor
+    
     
 
     
@@ -51,6 +51,7 @@ bool Game::loadBoard()
     //return true if board is loaded, return false if invalid input 
     //TODO: add while loop to repeat if invalid input (if returnded false: load board?)
     std::string choice;
+    int boardId;
 
     //definie initial empy board
     char emptyboard[11][11];
@@ -88,7 +89,16 @@ bool Game::loadBoard()
     if(choice == "load 1" || choice == "load 2"){
         //load board from Board.cpp
         //return true if board is loaded
-        
+        //create board id form choice
+        if(choice == "load 1"){
+            boardId = 1;
+        } else {
+            boardId = 2;
+        }
+        //load board
+        board->load(boardId);
+
+
         
     } else if(choice == "quit"){
         //go back to main menu;
