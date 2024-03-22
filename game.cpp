@@ -38,6 +38,14 @@ void Game::start()
     //add blank line
     std::cout << "\n\n";
     loadBoard();
+    
+    
+
+
+
+
+    //initializePlayer();
+    //play();
 
     //https://stackoverflow.com/questions/27081195/trying-to-understand-stdcin-get
     
@@ -52,65 +60,77 @@ bool Game::loadBoard()
     //TODO: add while loop to repeat if invalid input (if returnded false: load board?)
     std::string choice;
     int boardId;
-
-    //definie initial empy board
-    char emptyboard[11][11];
-    //create initial rows and columns
-    for(int i=1; i < 11; i++){
-        for(int j = 1; j < 11; j++) {
-            emptyboard[i][j] = ' ';
+    int loop = 0;
+    while(loop == 0){
+        //definie initial empy board
+        char emptyboard[11][11];
+        //create initial rows and columns
+        for(int i=1; i < 11; i++){
+            for(int j = 1; j < 11; j++) {
+                emptyboard[i][j] = ' ';
+            }
         }
-    }
-    //add row and column numbers
-    for (int i = 0; i< 10; i++){
-        emptyboard[i+1][0] = '0' + i;
-        emptyboard[0][i+1] = '0' + i;
-    }
-    // add space for top left
-    emptyboard[0][0] = ' ';
-    //print the board
-    for(int i=0; i < 11; i++){
-        for(int j = 0; j < 11; j++) {
-            std::cout << "|" << emptyboard[i][j];
+        //add row and column numbers
+        for (int i = 0; i< 10; i++){
+            emptyboard[i+1][0] = '0' + i;
+            emptyboard[0][i+1] = '0' + i;
         }
-        std::cout << "|\n";
+        // add space for top left
+        emptyboard[0][0] = ' ';
+        //print the board
+        for(int i=0; i < 11; i++){
+            for(int j = 0; j < 11; j++) {
+                std::cout << "|" << emptyboard[i][j];
+            }
+            std::cout << "|\n";
 
-    }
+        }
 
-    //add blank line 
-    std::cout << "\n\n";
-    //list options 
-    std::cout << "At this stage of the program, only two commands are acceptable: \n";
-    std::cout << "load <g> \n";
-    std::cout << "quit \n\n";
-    std::getline(std::cin, choice);
-    std::cout << "\n\n";
     
-    if(choice == "load 1" || choice == "load 2"){
-        //load board from Board.cpp
-        //return true if board is loaded
-        //create board id form choice
-        if(choice == "load 1"){
-            boardId = 1;
-        } else {
-            boardId = 2;
-        }
-        //load board
-        board->load(boardId);
-
-
-        
-    } else if(choice == "quit"){
-        //go back to main menu;
+        //add blank line 
         std::cout << "\n\n";
-        return false;
-    } else {
-        std::cout << "Invalid input \n\n";
-        loadBoard();
+        //list options 
+        std::cout << "At this stage of the program, only two commands are acceptable: \n";
+        std::cout << "load <g> \n";
+        std::cout << "quit \n\n";
+        std::getline(std::cin, choice);
+        std::cout << "\n\n";
+        
+        if(choice == "load 1" || choice == "load 2"){
+            //load board from Board.cpp
+            //return true if board is loaded
+            //create board id form choice
+            if(choice == "load 1"){
+                boardId = 1;
+            } else {
+                boardId = 2;
+            }
+            //load board
+            board->load(boardId);
+            return true;
+            loop++;
+
+            
+        } else if(choice == "quit"){
+            //go back to main menu;
+            std::cout << "\n\n";
+            return false;
+            
+        } else {
+            std::cout << "Invalid input \n\n";
+        }
     }
 
+    std::cout << "\n\n";
+    std::cout << "At this stage of the program, only three commands are acceptable: \n";
+    std::cout << "load <g> \n";
+    std::cout << "init <x>,<y>,<direction>\n";
+    std::cout << "quit \n\n";
 
-    return true;
+    
+    
+    
+    return false;  
 
     
     //return false; // feel free to revise this line, depending on your implementation.
