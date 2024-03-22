@@ -1,7 +1,12 @@
 #include "game.h"
+#include "board.h"
+#include <string>
 
 Game::Game() 
 {
+    //write constructor
+    
+
     
 
 
@@ -10,7 +15,7 @@ Game::Game()
 
 Game::~Game()
 {
-    // TODO
+    
 }
 
 
@@ -30,7 +35,9 @@ void Game::start()
     std::cout << "Press enter to continue ...";
     std::cin.ignore(); 
     std::cin.get();
-    
+    //add blank line
+    std::cout << "\n\n";
+    loadBoard();
 
     //https://stackoverflow.com/questions/27081195/trying-to-understand-stdcin-get
     
@@ -40,7 +47,63 @@ void Game::start()
 bool Game::loadBoard()
 {
     //TODO
-    return false; // feel free to revise this line, depending on your implementation.
+    //load empty board then ask player for choice, at which point use load from Board.cpp
+    //return true if board is loaded, return false if invalid input 
+    //TODO: add while loop to repeat if invalid input (if returnded false: load board?)
+    std::string choice;
+
+    //definie initial empy board
+    char emptyboard[11][11];
+    //create initial rows and columns
+    for(int i=1; i < 11; i++){
+        for(int j = 1; j < 11; j++) {
+            emptyboard[i][j] = ' ';
+        }
+    }
+    //add row and column numbers
+    for (int i = 0; i< 10; i++){
+        emptyboard[i+1][0] = '0' + i;
+        emptyboard[0][i+1] = '0' + i;
+    }
+    // add space for top left
+    emptyboard[0][0] = ' ';
+    //print the board
+    for(int i=0; i < 11; i++){
+        for(int j = 0; j < 11; j++) {
+            std::cout << "|" << emptyboard[i][j];
+        }
+        std::cout << "|\n";
+
+    }
+
+    //add blank line 
+    std::cout << "\n\n";
+    //list options 
+    std::cout << "At this stage of the program, only two commands are acceptable: \n";
+    std::cout << "load <g> \n";
+    std::cout << "quit \n\n";
+    std::getline(std::cin, choice);
+    std::cout << "\n\n";
+    
+    if(choice == "load 1" || choice == "load 2"){
+        //load board from Board.cpp
+        //return true if board is loaded
+        
+        
+    } else if(choice == "quit"){
+        //go back to main menu;
+        std::cout << "\n\n";
+        return false;
+    } else {
+        std::cout << "Invalid input \n\n";
+        loadBoard();
+    }
+
+
+    return true;
+
+    
+    //return false; // feel free to revise this line, depending on your implementation.
 }
 
 bool Game::initializePlayer()
