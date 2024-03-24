@@ -37,7 +37,11 @@ void Game::start()
     std::cin.get();
     //add blank line
     std::cout << "\n\n";
+   
+    //REQ3
     loadBoard();
+    //REQ4
+    initializePlayer();
     
     
 
@@ -60,8 +64,10 @@ bool Game::loadBoard()
     //TODO: add while loop to repeat if invalid input (if returnded false: load board?)
     std::string choice;
     int boardId;
-    int loop = 0;
-    while(loop == 0){
+
+    while(true){
+         //EMpty board options before load board
+        //REQ2
         //definie initial empy board
         char emptyboard[11][11];
         //create initial rows and columns
@@ -85,17 +91,19 @@ bool Game::loadBoard()
             std::cout << "|\n";
 
         }
-
-    
         //add blank line 
         std::cout << "\n\n";
+
+
+
         //list options 
         std::cout << "At this stage of the program, only two commands are acceptable: \n";
         std::cout << "load <g> \n";
         std::cout << "quit \n\n";
+
+
         std::getline(std::cin, choice);
         std::cout << "\n\n";
-        
         if(choice == "load 1" || choice == "load 2"){
             //load board from Board.cpp
             //return true if board is loaded
@@ -108,9 +116,7 @@ bool Game::loadBoard()
             //load board
             board->load(boardId);
             return true;
-            loop++;
 
-            
         } else if(choice == "quit"){
             //go back to main menu;
             std::cout << "\n\n";
@@ -120,17 +126,20 @@ bool Game::loadBoard()
             std::cout << "Invalid input \n\n";
         }
     }
+    
+    
 
-    std::cout << "\n\n";
-    std::cout << "At this stage of the program, only three commands are acceptable: \n";
-    std::cout << "load <g> \n";
-    std::cout << "init <x>,<y>,<direction>\n";
-    std::cout << "quit \n\n";
+//use this in initialise function
+    // std::cout << "\n\n";
+    // std::cout << "At this stage of the program, only three commands are acceptable: \n";
+    // std::cout << "load <g> \n";
+    // std::cout << "init <x>,<y>,<direction>\n";
+    // std::cout << "quit \n\n";
 
     
     
     
-    return false;  
+      
 
     
     //return false; // feel free to revise this line, depending on your implementation.
