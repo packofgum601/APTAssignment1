@@ -33,68 +33,49 @@ const vector<vector<Cell>> Board::BOARD_2 =
 Board::Board()
 {
     // TODO
+    //initailise board
+    std::vector<std::vector<Cell>> board = std::vector<std::vector<Cell>>(DEFAULT_BOARD_DIMENSION, std::vector<Cell>(DEFAULT_BOARD_DIMENSION, EMPTY));
+
+
+
+    
+    
+    
 }
 
 Board::~Board()
 {
     // TODO
+    delete board;
 }
 
 void Board::load(int boardId)
 {
     // TODO
+    //load boa
 
-    //initailise board
-    char board[11][11];
+        if(board != nullptr) {
+        delete board;
+        board = nullptr;
+    }   
+   
+
+
+
+    std::cout << "Board loading \n";
+
+    // Create a new board
+    if(boardId == 1) {
+        board = new std::vector<std::vector<Cell>>(BOARD_1);
+    } else if(boardId == 2) {
+        board = new std::vector<std::vector<Cell>>(BOARD_2);
+    }
+    std::cout << "Board loaded\n";
+
+
     
-    if(boardId == 1){
-        //load board 1
-        //create initial rows and columns
-        for(int i=1; i < 11; i++){
-            for(int j = 1; j < 11; j++) {
-                if(BOARD_1[i-1][j-1] == EMPTY){
-                    board[i][j] = ' ';
-                } else {
-                    board[i][j] = '*';
-            }
-        }
-        //add row and column numbers
-        for (int i = 0; i< 10; i++){
-            board[i+1][0] = '0' + i;
-            board[0][i+1] = '0' + i;
-        }
-        // add space for top left
-        board[0][0] = ' ';
-        }
-    }
-    else if(boardId == 2){
-        //load board 2
-        //create initial rows and columns
-        for(int i=1; i < 11; i++){
-            for(int j = 1; j < 11; j++) {
-                if(BOARD_2[i-1][j-1] == EMPTY){
-                    board[i][j] = ' ';
-                } else {
-                    board[i][j] = '*';
-            }
-        }
-        //add row and column numbers
-        for (int i = 0; i< 10; i++){
-            board[i+1][0] = '0' + i;
-            board[0][i+1] = '0' + i;
-        }
-        // add space for top left
-        board[0][0] = ' ';
-        }
-    }
-
-    //print the board
-    for(int i=0; i < 11; i++){
-        for(int j = 0; j < 11; j++) {
-            std::cout << "|" << board[i][j];
-        }
-        std::cout << "|\n";
-    }
+    
+    
     
 }
 
@@ -112,7 +93,34 @@ PlayerMove Board::movePlayerForward(Player* player)
 
 void Board::display(Player* player)
 {
+
     // TODO
+    std::cout << "  ";
+    for (int j = 0; j < 10; j++) {
+        std::cout << j << ' ';
+    }
+    std::cout << std::endl;
+    // Print board
+    for (int i = 0; i < 10; i++) {
+        // Print row number
+        std::cout << i;
+
+        // Print cells
+        for (int j = 0; j < 10; j++) {
+            std::cout << '|';
+            if ((*board)[i][j] == EMPTY) {
+                std::cout << EMPTY_OUTPUT;
+            } else if ((*board)[i][j] == BLOCKED) {
+                std::cout << BLOCKED_OUTPUT;
+            }
+        }
+        std::cout << '|' << std::endl;
+}
+
+
+
+
+
 }
 
 

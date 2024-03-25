@@ -1,9 +1,12 @@
 #include "game.h"
 #include "board.h"
 #include <string>
+#include "helper.h"
 
 Game::Game() 
 {
+    board = new Board();
+    player = new Player();
     
     
 
@@ -15,6 +18,7 @@ Game::Game()
 
 Game::~Game()
 {
+    delete board;
     
 }
 
@@ -64,6 +68,7 @@ bool Game::loadBoard()
     //TODO: add while loop to repeat if invalid input (if returnded false: load board?)
     std::string choice;
     int boardId;
+    
 
     while(true){
          //EMpty board options before load board
@@ -115,6 +120,8 @@ bool Game::loadBoard()
             }
             //load board
             board->load(boardId);
+            //print board with no player
+            board->display(nullptr);
             return true;
 
         } else if(choice == "quit"){
@@ -126,29 +133,45 @@ bool Game::loadBoard()
             std::cout << "Invalid input \n\n";
         }
     }
-    
-    
 
-//use this in initialise function
-    // std::cout << "\n\n";
-    // std::cout << "At this stage of the program, only three commands are acceptable: \n";
-    // std::cout << "load <g> \n";
-    // std::cout << "init <x>,<y>,<direction>\n";
-    // std::cout << "quit \n\n";
-
-    
-    
-    
-      
-
-    
-    //return false; // feel free to revise this line, depending on your implementation.
 }
 
 bool Game::initializePlayer()
 {
     //TODO
-    return false; // feel free to revise this line.
+    //initialize player on board
+    //return true if player is initialized, return false if invalid input
+    std::string choice;
+
+    while(true){
+        std::cout << "\n\n";
+        std::cout << "At this stage of the program, only three commands are acceptable: \n";
+        std::cout << "load <g> \n";
+        std::cout << "init <x>,<y>,<direction>\n";
+        std::cout << "quit \n\n";
+
+        std::cin >> choice;
+        std::cout << "\n\n";
+        //split string into tokens
+        
+        if(choice == "init"){
+            //initialize player
+            //return true if player is initialized
+            return true;
+        } else if(choice == "quit"){
+            //go back to main menu;
+            std::cout << "\n\n";
+            return false;
+        } else {
+            std::cout << "Invalid input \n\n";
+        }
+    }
+
+
+
+    
+
+    
 }
 
 void Game::play()
