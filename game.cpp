@@ -46,18 +46,8 @@ void Game::start()
     loadBoard();
     //REQ4
     initializePlayer();
-    
-    
-
-
-
-
-    //initializePlayer();
-    //play();
-
-    //https://stackoverflow.com/questions/27081195/trying-to-understand-stdcin-get
-    
-
+    //REQ5
+    play();
 }
 
 bool Game::loadBoard()
@@ -120,8 +110,7 @@ bool Game::loadBoard()
             }
             //load board
             board->load(boardId);
-            //print board with no player
-            board->display(nullptr);
+            
             return true;
 
         } else if(choice == "quit"){
@@ -138,43 +127,81 @@ bool Game::loadBoard()
 
 bool Game::initializePlayer()
 {
-    //TODO
+    
     //initialize player on board
     //return true if player is initialized, return false if invalid input
     std::string choice;
+    Direction direction = NORTH;
 
     while(true){
+        //print board with no player
+        board->display(nullptr);
         std::cout << "\n\n";
         std::cout << "At this stage of the program, only three commands are acceptable: \n";
         std::cout << "load <g> \n";
         std::cout << "init <x>,<y>,<direction>\n";
         std::cout << "quit \n\n";
 
-        std::cin >> choice;
+        std::getline(std::cin, choice);
         std::cout << "\n\n";
-        //split string into tokens
         
-        if(choice == "init"){
-            //initialize player
-            //return true if player is initialized
+        
+
+        std::vector<std::string> tokens;
+        Helper::splitString(choice, tokens, " ");
+
+        if(tokens.size() == 4 && tokens[0] == "init"){
+            Position* position = new Position(std::stoi(tokens[1]), std::stoi(tokens[2]));
+                if(tokens[3] == "north"){
+                    direction = NORTH;
+                    
+                } else if(tokens[3] == "east"){
+                    direction = EAST;
+                    
+                } else if(tokens[3] == "south"){
+                    direction = SOUTH;
+                    
+                } else if(tokens[3] == "west"){
+                    direction = WEST;
+                    
+                } else {
+                    std::cout << "Invalid input\n\n";
+                    initializePlayer();
+                    return false;
+                }
+            
+        
+
+            player->initialisePlayer(position, direction);
+            //place player on board
+            board->placePlayer(*position);
+
             return true;
         } else if(choice == "quit"){
             //go back to main menu;
             std::cout << "\n\n";
             return false;
         } else {
-            std::cout << "Invalid input \n\n";
+            std::cout << "Invalid input for init \n\n";
         }
     }
-
-
-
-    
-
-    
-}
+        
+    }
 
 void Game::play()
 {
-    //TODO
+    std::string choice;
+    while(true){
+        //display board with player
+        board->display(player);
+        std::cout << "\n\n";
+        std::cout << "At this stage of the program, only four commands are acceptable: \n";
+        std::cout << "forward (or f) \n";
+        std::cout << "turn_left (or l)\n";
+        std::cout << "turn_right (or r) \n\n";
+        std::cout << "quit \n\n";
+
+        std::getline(std::cin, choice);
+        std::cout << "\n\n";
+    }
 }

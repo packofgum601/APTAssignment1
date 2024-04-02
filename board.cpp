@@ -45,13 +45,13 @@ Board::Board()
 
 Board::~Board()
 {
-    // TODO
+   
     delete board;
 }
 
 void Board::load(int boardId)
 {
-    // TODO
+    
     //load boa
 
         if(board != nullptr) {
@@ -82,7 +82,16 @@ void Board::load(int boardId)
 bool Board::placePlayer(Position position)
 {
     // TODO
-    return false; // feel free to revise this line, depending on your implementation.
+    //place player on board
+    //return true if player is placed, return false if invalid input
+    if(position.x < 0 || position.x >= DEFAULT_BOARD_DIMENSION || position.y < 0 || position.y >= DEFAULT_BOARD_DIMENSION){
+        return false;
+    }
+    if((*board)[position.x][position.y] == BLOCKED){
+        return false;
+    }
+    (*board)[position.x][position.y] = PLAYER;
+    return true;
 }
 
 PlayerMove Board::movePlayerForward(Player* player)
@@ -112,9 +121,14 @@ void Board::display(Player* player)
                 std::cout << EMPTY_OUTPUT;
             } else if ((*board)[i][j] == BLOCKED) {
                 std::cout << BLOCKED_OUTPUT;
+            } else if ((*board)[i][j] == PLAYER) {
+                // Print player direction
+                player->displayDirection();
             }
         }
         std::cout << '|' << std::endl;
+
+    
 }
 
 

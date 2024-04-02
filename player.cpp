@@ -2,23 +2,41 @@
 
 Position::Position()
 {
-    //TODO
+    //initialise x and y to 0
+    x = 0;
+    y = 0;
+
+    
+
 }
 
 
 Position::Position(int x, int y)
 {
-    //TODO
+    //initialise x and y to the values passed in   
+    this->x = x;
+    this->y = y;
+
 }
 
 Player::Player()
 {
-    //TODO
+    //initialise position to (0,0), direction to NORTH
+    position = Position(0,0);
+    direction = NORTH;
+    
+    
+
 }
 
 void Player::initialisePlayer(Position* position, Direction direction)
 {
-    //TODO
+    //initialise the player's position, direction and moves
+    this->position = *position;
+    this->direction = direction;
+    
+    
+
 }
 
 void Player::turnDirection(TurnDirection turnDirection)
@@ -40,5 +58,16 @@ void Player::updatePosition(Position position)
 
 void Player::displayDirection()
 {
-    //TODO
+    //display the direction of the player with arrow symbols using if statements
+    if(direction == NORTH){
+        std::cout << "↑";
+    } else if(direction == EAST){
+        std::cout << "→";
+    } else if(direction == SOUTH){
+        std::cout << "↓";
+    } else if(direction == WEST){
+        std::cout << "←";
+    
+    }
+
 }
