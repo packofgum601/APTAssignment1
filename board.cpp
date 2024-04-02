@@ -58,11 +58,6 @@ void Board::load(int boardId)
         delete board;
         board = nullptr;
     }   
-   
-
-
-
-    std::cout << "Board loading \n";
 
     // Create a new board
     if(boardId == 1) {
@@ -70,7 +65,7 @@ void Board::load(int boardId)
     } else if(boardId == 2) {
         board = new std::vector<std::vector<Cell>>(BOARD_2);
     }
-    std::cout << "Board loaded\n";
+
 
 
     

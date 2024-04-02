@@ -145,6 +145,23 @@ bool Game::initializePlayer()
         std::getline(std::cin, choice);
         std::cout << "\n\n";
         
+        //load loard if choice is load
+        if(choice == "load 1" || choice == "load 2"){
+            //load board from Board.cpp
+            //return true if board is loaded
+            //create board id form choice
+            int boardId;
+            if(choice == "load 1"){
+                boardId = 1;
+            } else {
+                boardId = 2;
+            }
+            //load board
+            board->load(boardId);
+            
+            initializePlayer();
+            return false;
+        }
         
 
         std::vector<std::string> tokens;
@@ -182,7 +199,7 @@ bool Game::initializePlayer()
             std::cout << "\n\n";
             return false;
         } else {
-            std::cout << "Invalid input for init \n\n";
+            std::cout << "Invalid input\n\n";
         }
     }
         
