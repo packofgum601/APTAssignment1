@@ -19,6 +19,7 @@ Game::Game()
 Game::~Game()
 {
     delete board;
+    delete player;
     
 }
 
@@ -36,18 +37,23 @@ void Game::start()
     std::cout << "turn_left (or l) \n";
     std::cout << "turn_right (or r) \n";
     std::cout << "quit \n";
-    std::cout << "Press enter to continue ...";
-    std::cin.ignore(); 
+    std::cout << "Press enter to continue ..."; 
     std::cin.get();
     //add blank line
     std::cout << "\n\n";
    
     //REQ3
-    loadBoard();
+    //loadBoard();
+    if(!loadBoard()){
+        return;
+    }
     //REQ4
-    initializePlayer();
+    if(!initializePlayer()){
+        return;
+    }
     //REQ5
     play();
+    std::cout << "\n\n";
 }
 
 bool Game::loadBoard()
@@ -55,16 +61,17 @@ bool Game::loadBoard()
     //TODO
     //load empty board then ask player for choice, at which point use load from Board.cpp
     //return true if board is loaded, return false if invalid input 
-    //TODO: add while loop to repeat if invalid input (if returnded false: load board?)
+    
     std::string choice;
     int boardId;
-    
+    char emptyboard[11][11];
 
     while(true){
          //EMpty board options before load board
         //REQ2
         //definie initial empy board
-        char emptyboard[11][11];
+        
+        
         //create initial rows and columns
         for(int i=1; i < 11; i++){
             for(int j = 1; j < 11; j++) {
@@ -114,9 +121,10 @@ bool Game::loadBoard()
             return true;
 
         } else if(choice == "quit"){
-            //go back to main menu;
             std::cout << "\n\n";
             return false;
+
+
             
         } else {
             std::cout << "Invalid input \n\n";
@@ -159,45 +167,52 @@ bool Game::initializePlayer()
             //load board
             board->load(boardId);
             
-            initializePlayer();
+            return initializePlayer();
+           
+        }
+        else if(choice == "quit"){
+            //go back to main menu;
+            std::cout << "\n\n";
             return false;
         }
         
 
+        //split string by space then by commas
         std::vector<std::string> tokens;
         Helper::splitString(choice, tokens, " ");
-
-        if(tokens.size() == 4 && tokens[0] == "init"){
-            Position* position = new Position(std::stoi(tokens[1]), std::stoi(tokens[2]));
-                if(tokens[3] == "north"){
+        if (tokens[0] == "init" ){
+            Helper::splitString(tokens[1], tokens, ",");
+        }
+        std::cout << "\n\n";
+        
+        if(tokens.size() == 3){
+            Position* position = new Position(std::stoi(tokens[1]), std::stoi(tokens[0]));
+                if(tokens[2] == "north"){
                     direction = NORTH;
-                    
-                } else if(tokens[3] == "east"){
+
+                } else if(tokens[2] == "east"){
                     direction = EAST;
                     
-                } else if(tokens[3] == "south"){
+                } else if(tokens[2] == "south"){
                     direction = SOUTH;
                     
-                } else if(tokens[3] == "west"){
+                } else if(tokens[2] == "west"){
                     direction = WEST;
                     
                 } else {
                     std::cout << "Invalid input\n\n";
-                    initializePlayer();
-                    return false;
+                    return initializePlayer();
+                    
                 }
-            
-        
 
             player->initialisePlayer(position, direction);
             //place player on board
-            board->placePlayer(*position);
-
+            if(!board->placePlayer(*position)){
+                std::cout << "Cannot place player there\n\n";
+                return initializePlayer();
+            }
+            //if player is placed, return true
             return true;
-        } else if(choice == "quit"){
-            //go back to main menu;
-            std::cout << "\n\n";
-            return false;
         } else {
             std::cout << "Invalid input\n\n";
         }
@@ -215,10 +230,17 @@ void Game::play()
         std::cout << "At this stage of the program, only four commands are acceptable: \n";
         std::cout << "forward (or f) \n";
         std::cout << "turn_left (or l)\n";
-        std::cout << "turn_right (or r) \n\n";
+        std::cout << "turn_right (or r) \n";
         std::cout << "quit \n\n";
 
-        std::getline(std::cin, choice);
+        choice = Helper::readInput();
         std::cout << "\n\n";
+
+        //if choice is quit, return to main menu
+        if(choice == "quit"){
+            return;
+        }
+
+    
     }
 }

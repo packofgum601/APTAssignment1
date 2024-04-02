@@ -17,26 +17,31 @@ int main()
      * TODO: here's the main function. You can write the "main menu" loop/code
      * here or you can make separate functions - up to you.
      */
-    int n = 0;
-    int choice;
+    //int n = 0;
+    
     Game game;
 
-    while(n == 0) {
+    while(true) {
+        //clear input 
         std::cout << "Welcome to Vacuum CLeaning Game! \n";
         std::cout << "----------------------------------------------\n";
         std::cout << "1. Play Game\n";
         std::cout << "2. Show student's information\n";
         std::cout << "3. Quit \n\n";
         std::cout << "Please enter your choice: ";
-        std::cin >> choice;
+        //use helper get input 
+        string choice = Helper::readInput();
         std::cout << "\n\n";      
 
-        if(choice == 1){
+        if(choice == "1"){
             game.start();
-        } else if (choice == 2) {
+        } else if (choice == "2") {
             showStudentInformation("Joseph Packham", "s38389789", "s3838978@student.rmit.edu.au");
-        } else if (choice == 3) {
-            n++; 
+        } else if (choice == "3") {
+            return false; 
+        } else {
+            std::cout << "Invalid input. Please try again.\n\n";
+
         }
 
 

@@ -52,7 +52,7 @@ Board::~Board()
 void Board::load(int boardId)
 {
     
-    //load boa
+    //load board
 
         if(board != nullptr) {
         delete board;
@@ -79,12 +79,15 @@ bool Board::placePlayer(Position position)
     // TODO
     //place player on board
     //return true if player is placed, return false if invalid input
+    //check if position is valid
     if(position.x < 0 || position.x >= DEFAULT_BOARD_DIMENSION || position.y < 0 || position.y >= DEFAULT_BOARD_DIMENSION){
         return false;
     }
+    //check if position is blocked
     if((*board)[position.x][position.y] == BLOCKED){
         return false;
     }
+    //place player on board
     (*board)[position.x][position.y] = PLAYER;
     return true;
 }
