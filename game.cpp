@@ -10,10 +10,6 @@ Game::Game()
     
     
 
-    
-
-
-
 }
 
 Game::~Game()
@@ -41,7 +37,7 @@ void Game::start()
     std::cin.get();
     //add blank line
     std::cout << "\n\n";
-   
+
     //REQ3
     //loadBoard();
     if(!loadBoard()){
