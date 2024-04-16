@@ -13,22 +13,21 @@
 
 enum Direction
 {
-    NORTH,
-    EAST,
+	NORTH,
+	EAST,
 	SOUTH,
 	WEST
 };
 
 enum TurnDirection
 {
-    TURN_LEFT,
-    TURN_RIGHT
+	TURN_LEFT,
+	TURN_RIGHT
 };
 
 class Position
 {
 public:
-
 	int x;
 	int y;
 
@@ -40,18 +39,17 @@ class Player
 {
 
 public:
-
 	Position position; // x,y coordinates
 	Direction direction;
 	unsigned moves;
 
 	Player();
-	
+
 	/**
 	 * Initialise the player - set the position, direction to the provided values
 	 * and set moves to 0.
 	 */
-	void initialisePlayer(Position* position, Direction direction);
+	void initialisePlayer(Position *position, Direction direction);
 
 	/**
 	 * Turn the player's direction according to the direction of the player and the
