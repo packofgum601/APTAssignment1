@@ -45,5 +45,6 @@ public:
 
     static void printInvalidInput();
 
+    static bool checkEOF(std::string input);
 };
 #endif

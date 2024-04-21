@@ -64,3 +64,32 @@ string Helper::readInput()
 
     return input;
 }
+
+//TODO: fix this EOF error later
+// std::string Helper::readInput()
+// {
+//      if (std::cin.eof()) {
+//         // EOF detected
+//         std::cin.clear(); 
+//        // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+//     }
+    
+//     std::string input;
+    
+   
+//      if(!std::getline(std::cin, input) && std::cin.eof()){
+//            //reset the eof flag
+//          clearerr(stdin);
+//          return "EOF";
+        
+//     }
+
+//     //reset the eof flag
+//    clearerr(stdin);
+
+//     return input;
+    
+    
+// }
+
+

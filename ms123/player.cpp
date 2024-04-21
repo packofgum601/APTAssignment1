@@ -14,23 +14,24 @@ Position::Position(int x, int y)
     this->y = y;
 }
 
+// Player constructor
 Player::Player()
 {
-    // initialise position to (0,0), direction to NORTH
     position = Position(0, 0);
-    direction = NORTH;
+    direction = Direction::NORTH;
 }
 
+// initialise the player's position, direction and moves
 void Player::initialisePlayer(Position *position, Direction direction)
 {
-    // initialise the player's position, direction and moves
     this->position = *position;
     this->direction = direction;
+    moves = 0;
 }
 
+// turn the player's direction based on the given turn direction
 void Player::turnDirection(TurnDirection turnDirection)
 {
-    // turn the player's direction based of the turn direction
     if (turnDirection == TURN_LEFT)
     {
         if (direction == NORTH)
@@ -71,35 +72,55 @@ void Player::turnDirection(TurnDirection turnDirection)
     }
 }
 
+// get the position forward of the player based on the direction. do not update position
 Position Player::getNextForwardPosition()
 {
-    // move player forward based on direction
+    Position nextPosition = position;
     if (direction == NORTH)
     {
-        return Position(position.x, position.y - 1);
+        nextPosition.y--;
     }
     else if (direction == EAST)
     {
-        return Position(position.x + 1, position.y);
+        nextPosition.x++;
     }
     else if (direction == SOUTH)
     {
-        return Position(position.x, position.y + 1);
+        nextPosition.y++;
     }
     else if (direction == WEST)
     {
-        return Position(position.x - 1, position.y);
+        nextPosition.x--;
     }
-    return Position();
+    return nextPosition;
 }
 
+// update the player's position
 void Player::updatePosition(Position position)
 {
-    // print arrow based on direction
+    this->position = position;
+    // update moves
+    moves++;
 }
 
+// display the player's direction with the corresponding arrow
 void Player::displayDirection()
 {
-    // display the direction of the player with arrow symbols using if statements
-    return updatePosition(position);
+
+    if (direction == NORTH)
+    {
+        printf(DIRECTION_ARROW_OUTPUT_NORTH);
+    }
+    else if (direction == EAST)
+    {
+        printf(DIRECTION_ARROW_OUTPUT_EAST);
+    }
+    else if (direction == SOUTH)
+    {
+        printf(DIRECTION_ARROW_OUTPUT_SOUTH);
+    }
+    else if (direction == WEST)
+    {
+        printf(DIRECTION_ARROW_OUTPUT_WEST);
+    }
 }
